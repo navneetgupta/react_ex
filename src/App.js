@@ -10,6 +10,8 @@ function App() {
         <
         Person / >
         <
+        Person / >
+        <
         /div>
     );
 }
