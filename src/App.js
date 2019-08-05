@@ -9,9 +9,10 @@ const App = prps => {
             { name: "Max", age: 29 },
             { name: "Manu", age: 28 },
             { name: "MaxManu", age: 26 }
-        ],
-		someOtherState: 'Other state'
+        ]
     });
+	const [otherState, setOtherState] = useState('Other state');
+
 	const clickMeHandler = () => {
 		console.log('I\'was Clicked!!');
 		setPersonsState({
