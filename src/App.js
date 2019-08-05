@@ -12,19 +12,18 @@ class App extends Component {
         ]
     };
 
+	clickMeHandler = () => {
+		console.log('I\'was Clicked!!');
+	}
     render() {
-        return ( < div className = 'App' >
-            <
-            Person name = { this.state.persons[0].name } age = { this.state.persons[0].age }
-            / > <
-            Person name = { this.state.persons[1].name } age = { this.state.persons[1].age }
-            / > <
-            Person name = { this.state.persons[2].name } age = { this.state.persons[2].age }
-            / > < /
-            div >
+        return (
+			<div className = 'App'>
+				<button onClick = {this.clickMeHandler}>Click Me!!</button>
+	            <Person name = { this.state.persons[0].name } age = { this.state.persons[0].age }/>
+				<Person name = { this.state.persons[1].name } age = { this.state.persons[1].age }/>
+				<Person name = { this.state.persons[2].name } age = { this.state.persons[2].age }/>
+			</div >
         );
     }
 }
-
-
 export default App;
