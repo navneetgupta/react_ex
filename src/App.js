@@ -9,11 +9,18 @@ class App extends Component {
             { name: "Max", age: 29 },
             { name: "Manu", age: 28 },
             { name: "MaxManu", age: 26 }
-        ]
+        ],
+		someOtherState: 'Other state'
     };
 
 	clickMeHandler = () => {
 		console.log('I\'was Clicked!!');
+		this.setState({
+			persons: [
+	            { name: "Maximillian", age: 29 },
+	            { name: "Manu", age: 28 },
+	            { name: "MaxManu", age: 26 }
+        ]});
 	}
     render() {
         return (
