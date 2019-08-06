@@ -5,24 +5,12 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 28 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
+      { id: '1', name: 'Max', age: 28 },
+      { id: '2', name: 'Manu', age: 29 },
+      { id: '3', name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
 	showPersons: false
-  }
-
-  switchNameHandler = (newName) => {
-    // console.log('Was clicked!');
-    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
-    this.setState( {
-      persons: [
-        { name: newName, age: 28 },
-        { name: 'Manu', age: 29 },
-        { name: 'Stephanie', age: 27 }
-      ]
-    } )
   }
 
   nameChangedHandler = (event) => {
@@ -67,7 +55,8 @@ class App extends Component {
 					return <Person
 					click={this.deletePersonElement.bind(this, index)}
 	  				name={p.name}
-	  				age={p.age} />
+	  				age={p.age}
+					key={p.id} />  // we can pass index as unique element but it depends on list and will keep changing based on the list so its not a good choice
 				})}
 			  </div>
 		  );
