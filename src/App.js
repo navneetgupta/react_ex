@@ -33,16 +33,17 @@ class App extends Component {
       ]
     } )
   }
+  /*
+  <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>
 
+  Here we are adding paranthesis () at end of function name as opposed to passing function reference as props to child components. because here it would not be executed immediately due to arraow function wrapper.
+  this can be inefficient => React can re-render certain things in ur app to offten
+  */
   render () {
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-		/* arrow function implicilty add return so below handler will be {() => return this.switchNameHandler()}
-		Here we are adding paranthesis () at end of function name as opposed to passing function reference as props to child components. because here it would not be executed immediately due to arraow function wrapper.
-		this can be inefficient => React can re-render certain things in ur app to offten
-		*/
         <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>
         <Person
           name={this.state.persons[0].name}
