@@ -1,20 +1,13 @@
 import React from 'react';
 
 const validationComponent = (props) => {
+	let validationMessage = "Text Long Enough"; // Here it cound be JSX also same as class Component
 	if(props.stringLength < 5) {
-		return (
-			<div>Text too short!!</div>
-		);
-	} else if(props.stringLength > 10) {
-		return (
-			<div>Text too long!!</div>
-		);
-	} else {
-		return (
-			<div>Great!!</div>
-		);
+		validationMessage = "Text too short!!"; // Here it cound be JSX also same as class Component
 	}
-
+	return (
+		<div>{validationMessage}</div>
+	);
 }
 
 export default validationComponent;
