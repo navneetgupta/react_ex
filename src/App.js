@@ -48,13 +48,6 @@ class App extends Component {
   this can be inefficient => React can re-render certain things in ur app to offten
   */
   render () {
-	  const style = {
-		  backgroundColor: 'white',
-		  font: 'inherit',
-		  border: '1px solid blue',
-		  padding: '8px',
-		  cursor: 'pointer',
-	  };
 	  let person = null;
 	  if(this.state.showPersons) {
 		  person = (
@@ -84,7 +77,7 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
         <p className={csscl.join(' ')}>This is really working!</p>
         <button
-			style={style}
+			style={styles.style}
 			onClick={this.togglePersonViewHandler}>Toggle Person View</button>
 		{person}
 
