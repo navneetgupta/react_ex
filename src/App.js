@@ -16,6 +16,13 @@ class App extends Component {
 	  })
   }
   deleteHalndler = (index) => {
+	  console.log(index);
+	  const oldString = this.state.string;
+	  const newString = oldString.substr(0, index) + oldString.substr(index+1);
+	  this.setState({
+		  string: newString,
+		  stringLength: newString.length
+	  })
   }
   /*
   <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>
@@ -24,20 +31,19 @@ class App extends Component {
   this can be inefficient => React can re-render certain things in ur app to offten
   */
   render () {
-	  const style = {
-		  backgroundColor: 'white',
-		  font: 'inherit',
-		  border: '1px solid blue',
-		  padding: '8px',
-		  cursor: 'pointer'
-	  };
-
 	let characters = null;
 
 	if(this.state.string) {
-		characters = this.state.string.map((c, index) => {
-			return <CharComponent char={c} delete={this.deleteHalndler.bind(this, index)}>;
-		});
+		characters = (
+			<div>
+				{ this.state.string.split('').map((c, index) => {
+					return <CharComponent
+								char={c}
+								delete={this.deleteHalndler.bind(this, index)}
+								key={index} />;
+				})}
+			</div>
+		);
 	};
 
     return (
@@ -46,6 +52,7 @@ class App extends Component {
 		<input type="text" onChange={this.calculatelengthHandler} value={this.state.string} />
 		<p>The Length of String is : {this.state.stringLength} </p>
 		<ValidationComponent stringLength={this.state.stringLength} />
+		{characters}
       </div>
     );
   }

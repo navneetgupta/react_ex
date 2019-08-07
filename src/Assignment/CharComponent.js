@@ -9,7 +9,7 @@ const charComponent = (props) => {
 		border: '1px solid black'
 	}
 	return (
-		<div style={style} onClick={props.deleteHalndler}>
+		<div style={style} onClick={props.delete}>
 			{props.char}
 		</div>
 	);
