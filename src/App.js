@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -53,12 +54,12 @@ class App extends Component {
 		  person = (
 			  <div>
 			  	{this.state.persons.map((p,index) => {
-					return <Person
+					return <ErrorBoundary key={p.id} ><Person
 					click={this.deletePersonElement.bind(this, index)}
 					changed={(event) => this.nameChangedHandler(event, p.id)}
 	  				name={p.name}
 	  				age={p.age}
-					key={p.id} />  // we can pass index as unique element but it depends on list and will keep changing based on the list so its not a good choice
+					/></ErrorBoundary>  // we can pass index as unique element but it depends on list and will keep changing based on the list so its not a good choice
 				})}
 			  </div>
 		  );
