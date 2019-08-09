@@ -7,7 +7,7 @@ const persons = (props) => {
 	if(props.showPersons) {
 		person = (
 			<div>
-			  {props.persons.map((p,index) => {
+				{props.persons.map((p,index) => {
 				  return <ErrorBoundary key={p.id} ><Person
 				  click={() => props.clicked(index)}
 				  changed={(event) => props.changed(event, p.id)}
@@ -18,6 +18,7 @@ const persons = (props) => {
 			</div>
 		);
 	}
+	console.log("[Persons.js] rendering..")
 	return (<div>{person}</div>);
 }
 
