@@ -7,9 +7,6 @@ const Cockpit = props => {
     // This will run for every changes for virtual dom and then verify it with actual dom if any changes then
     // Only it changes actual dom.
     // It runs for every lifecycle hook we have seen in class based component. after every reder cycle infact
-    setTimeout(() => {
-      console.log("Saved Data to cloud...");
-    }, 1000);
   }, [props.persons]);
 
   useEffect(() => {
@@ -18,7 +15,11 @@ const Cockpit = props => {
     );
     // This return will run before the main useEffect function runs
     // but after the (first) render cycle.
+    const timeout = setTimeout(() => {
+      console.log("Saved Data to cloud...");
+    }, 1000);
     return () => {
+      clearTimeout(timeout);
       console.log("[Cockpit.js] Cleanup Work in useEffect progress...");
     };
   }, []);
