@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const cockpit = props => {
+const Cockpit = props => {
+  useEffect(() => {
+    console.log("[CockPit.js] useEffeck Hook...");
+    // HTtp Request goes here
+    // This will run for every changes for virtual dom and then verify it with actual dom if any changes then
+    // Only it changes actual dom.
+    // It runs for every lifecycle hook we have seen in class based component. after every reder cycle infact
+  });
   const csscl = [];
   if (props.persons.length <= 2) {
     csscl.push(props.styles.red);
@@ -20,4 +27,4 @@ const cockpit = props => {
   );
 };
 
-export default cockpit;
+export default Cockpit;
