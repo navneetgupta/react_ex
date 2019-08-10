@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.module.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -48,13 +48,6 @@ class App extends Component {
   this can be inefficient => React can re-render certain things in ur app to offten
   */
   render () {
-	  const style = {
-		  backgroundColor: 'white',
-		  font: 'inherit',
-		  border: '1px solid blue',
-		  padding: '8px',
-		  cursor: 'pointer'
-	  };
 	  let person = null;
 	  if(this.state.showPersons) {
 		  person = (
@@ -71,12 +64,20 @@ class App extends Component {
 		  );
 	  }
 
+	  const csscl = [];
+	  if(this.state.persons.length <=2) {
+		  csscl.push(styles.red);
+	  }
+
+	  if(this.state.persons.length <=1) {
+		  csscl.push(styles.bold);
+	  }
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
+        <p className={csscl.join(' ')}>This is really working!</p>
         <button
-			style={style}
+			style={styles.style}
 			onClick={this.togglePersonViewHandler}>Toggle Person View</button>
 		{person}
 
