@@ -7,17 +7,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     console.log("[App.js] Constructor");
-    this.state = {
-      persons: [
-        { id: "1", name: "Max", age: 28 },
-        { id: "2", name: "Manu", age: 29 },
-        { id: "3", name: "Stephanie", age: 26 }
-      ],
-      otherState: "some other value",
-      showPersons: false
-    };
   }
-
+  state = {
+    persons: [
+      { id: "1", name: "Max", age: 28 },
+      { id: "2", name: "Manu", age: 29 },
+      { id: "3", name: "Stephanie", age: 26 }
+    ],
+    otherState: "some other value",
+    showPersons: false,
+    showCockpit: true
+  };
   static getDerivedStateFromProps(props, state) {
     console.log("[App.js] getDerivedStateFromProps");
     return state; // return updated state
@@ -41,14 +41,14 @@ class App extends Component {
     });
   };
 
-	componentWillMount() {
-		// NOTE : To be depreceated in library.
-		console.log("[App.js] componentWillMount..." );
-	}
-	componentDidMount() {
-		// Here is the place where we could place the http calls.
-		console.log("[App.js] componentDidMount..");
-	}
+  componentWillMount() {
+    // NOTE : To be depreceated in library.
+    console.log("[App.js] componentWillMount...");
+  }
+  componentDidMount() {
+    // Here is the place where we could place the http calls.
+    console.log("[App.js] componentDidMount..");
+  }
 
   togglePersonViewHandler = () => {
     const doesShow = this.state.showPersons;
@@ -60,6 +60,11 @@ class App extends Component {
     persons.splice(index, 1);
     this.setState({ persons: persons });
   };
+
+  toggleCockpitHandler = () => {
+    const showCockpit = this.state.showCockpit;
+    this.setState({ showCockpit: !showCockpit });
+  };
   /*
   <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>
 
@@ -68,13 +73,20 @@ class App extends Component {
   */
   render() {
     console.log("[App.js] render..");
-    return (
-      <div className={styles.App}>
+    let cockpit = null;
+    if (this.state.showCockpit) {
+      cockpit = (
         <Cockpit
           persons={this.state.persons}
           styles={styles}
           toggle={this.togglePersonViewHandler}
         />
+      );
+    }
+    return (
+      <div className={styles.App}>
+        <button onClick={this.toggleCockpitHandler}>Remove Cockpit</button>
+        {cockpit}
         <Persons
           persons={this.state.persons}
           clicked={this.deletePersonElement}

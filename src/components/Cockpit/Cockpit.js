@@ -12,6 +12,27 @@ const Cockpit = props => {
     }, 1000);
   }, [props.persons]);
 
+  useEffect(() => {
+    console.log(
+      "this will be executed only when component is loaded, not every render cycle"
+    );
+    // This return will run before the main useEffect function runs
+    // but after the (first) render cycle.
+    return () => {
+      console.log("[Cockpit.js] Cleanup Work in useEffect progress...");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("[Cockpit.js] 3rd useEffect Cycle");
+    // This return will run before the main useEffect function runs
+    // but after the (first) render cycle.
+    // below will run cleanu on every render cycle.
+    return () => {
+      console.log("[Cockpit.js] 2nd cleanup work in useHook progressing...");
+    };
+  });
+
   //useEffect(); We could define multiple useHook for different set of data.
 
   const csscl = [];
