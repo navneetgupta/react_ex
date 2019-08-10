@@ -37,11 +37,11 @@ const Cockpit = props => {
   //useEffect(); We could define multiple useHook for different set of data.
 
   const csscl = [];
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     csscl.push(props.styles.red);
   }
 
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     csscl.push(props.styles.bold);
   }
   return (
@@ -55,4 +55,5 @@ const Cockpit = props => {
   );
 };
 
-export default Cockpit;
+// export default Cockpit;
+export default React.memo(Cockpit);
