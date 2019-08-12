@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
 
 class App extends Component {
   constructor(props) {
@@ -84,7 +85,7 @@ class App extends Component {
       );
     }
     return (
-      <div className={styles.App}>
+      <WithClass classes={styles.App}>
         <button onClick={this.toggleCockpitHandler}>Remove Cockpit</button>
         {cockpit}
         <Persons
@@ -93,7 +94,7 @@ class App extends Component {
           showPersons={this.state.showPersons}
           changed={this.nameChangedHandler}
         />
-      </div>
+      </WithClass>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
