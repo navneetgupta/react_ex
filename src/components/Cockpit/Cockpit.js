@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useContext } from "react";
+import AuthContext from "../../context/auth-context";
 
 const Cockpit = props => {
+  const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
+
   useEffect(() => {
     console.log("[CockPit.js] useEffeck Hook...");
     // HTtp Request goes here
@@ -13,6 +17,7 @@ const Cockpit = props => {
     console.log(
       "this will be executed only when component is loaded, not every render cycle"
     );
+    toggleBtnRef.current.click();
     // This return will run before the main useEffect function runs
     // but after the (first) render cycle.
     const timeout = setTimeout(() => {
@@ -48,8 +53,16 @@ const Cockpit = props => {
     <div>
       <h1>Hi, I'm a React App</h1>
       <p className={csscl.join(" ")}>This is really working!</p>
-      <button style={props.styles.style} onClick={props.toggle}>
+      <button
+        ref={toggleBtnRef}
+        style={props.styles.style}
+        onClick={props.toggle}
+      >
         Toggle Person View
+      </button>
+
+      <button onClick={authContext.login} style={props.styles.style}>
+        Login
       </button>
     </div>
   );
