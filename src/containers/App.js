@@ -23,6 +23,7 @@ class App extends Component {
     changeCounter: 0,
     authenticated: false
   };
+
   static getDerivedStateFromProps(props, state) {
     console.log("[App.js] getDerivedStateFromProps");
     return state; // return updated state

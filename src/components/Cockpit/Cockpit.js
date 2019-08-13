@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import AuthContext from "../../context/auth-context";
 
 const Cockpit = props => {
   const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     console.log("[CockPit.js] useEffeck Hook...");
@@ -59,14 +60,10 @@ const Cockpit = props => {
       >
         Toggle Person View
       </button>
-      <AuthContext.Consumer>
-        {context => (
-          <button onClick={context.login} style={props.styles.style}>
-            {" "}
-            Login
-          </button>
-        )}
-      </AuthContext.Consumer>
+
+      <button onClick={authContext.login} style={props.styles.style}>
+        Login
+      </button>
     </div>
   );
 };
