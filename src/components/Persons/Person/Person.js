@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import personcss from "./Person.module.css";
 import Aux from "../../../hoc/Aux";
 import withClass from "../../../hoc/withClass";
+import PropTypes from "prop-types";
 
 class Person extends Component {
   render() {
@@ -23,5 +24,11 @@ class Person extends Component {
   }
 }
 
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changes: PropTypes.func
+};
 // above we are returning array of elements seperated by comma.
 export default withClass(Person, personcss.Person);
