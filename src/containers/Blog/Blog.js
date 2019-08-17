@@ -9,19 +9,24 @@ import "./Blog.css";
 class Blog extends Component {
   state = {
     posts: [],
-    selectedPostId: null
+    selectedPostId: null,
+    error: false
   };
   componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then(response => {
-      const posts = response.data.slice(0, 6).map(post => {
-        return {
-          ...post,
-          author: "Max"
-        };
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then(response => {
+        const posts = response.data.slice(0, 6).map(post => {
+          return {
+            ...post,
+            author: "Max"
+          };
+        });
+        this.setState({ posts: posts });
+      })
+      .catch(error => {
+        this.setState({ error: true });
       });
-
-      this.setState({ posts: posts });
-    });
   }
   postselectedHandler = id => {
     this.setState({
@@ -29,16 +34,20 @@ class Blog extends Component {
     });
   };
   render() {
-    const posts = this.state.posts.map(post => {
-      return (
-        <Post
-          title={post.title}
-          key={post.id}
-          author={post.author}
-          clicked={() => this.postselectedHandler(post.id)}
-        />
-      );
-    });
+    let posts = <p style={{ textAlign: "center" }}>Something Went Wrong!!!!</p>;
+    if (!this.state.error) {
+      posts = this.state.posts.map(post => {
+        return (
+          <Post
+            title={post.title}
+            key={post.id}
+            author={post.author}
+            clicked={() => this.postselectedHandler(post.id)}
+          />
+        );
+      });
+    }
+
     return (
       <div>
         <section className="Posts"> {posts}</section>
