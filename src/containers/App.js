@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import styles from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import withClass from "../hoc/withClass";
+import withClass from "../hoc/WithClass";
 import Aux from "../hoc/Aux";
 import AuthContext from "../context/auth-context";
+import Blog from "./Blog/Blog";
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class App extends Component {
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
-    authenticated: false
+    authenticated: false,
+    isBlogProject: true
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -64,6 +66,13 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
+  toggleBlogProject = () => {
+    const oldState = this.state.isBlogProject;
+    this.setState({
+      isBlogProject: !oldState
+    });
+  };
+
   deletePersonElement = index => {
     const persons = [...this.state.persons];
     persons.splice(index, 1);
@@ -98,23 +107,32 @@ class App extends Component {
         />
       );
     }
+    let currentProject = <Blog />;
+    if (!this.state.isBlogProject) {
+      currentProject = (
+        <Aux>
+          <button onClick={this.toggleCockpitHandler}>Remove Cockpit</button>
+          <AuthContext.Provider
+            value={{
+              authenticated: this.state.authenticated,
+              login: this.loginHandler
+            }}
+          >
+            {cockpit}
+            <Persons
+              persons={this.state.persons}
+              clicked={this.deletePersonElement}
+              showPersons={this.state.showPersons}
+              changed={this.nameChangedHandler}
+            />
+          </AuthContext.Provider>
+        </Aux>
+      );
+    }
     return (
       <Aux>
-        <button onClick={this.toggleCockpitHandler}>Remove Cockpit</button>
-        <AuthContext.Provider
-          value={{
-            authenticated: this.state.authenticated,
-            login: this.loginHandler
-          }}
-        >
-          {cockpit}
-          <Persons
-            persons={this.state.persons}
-            clicked={this.deletePersonElement}
-            showPersons={this.state.showPersons}
-            changed={this.nameChangedHandler}
-          />
-        </AuthContext.Provider>
+        <button onClick={this.toggleBlogProject}>Toggle Projects</button>
+        {currentProject}
       </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));

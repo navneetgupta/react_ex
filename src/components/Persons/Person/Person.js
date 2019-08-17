@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import personcss from "./Person.module.css";
 import Aux from "../../../hoc/Aux";
-import withClass from "../../../hoc/withClass";
+import withClass from "../../../hoc/WithClass";
 import PropTypes from "prop-types";
 import AuthContext from "../../../context/auth-context";
 
