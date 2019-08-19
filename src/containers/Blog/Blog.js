@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "../../axios";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
 import "./Blog.css";
@@ -13,10 +13,18 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="/blog/create">Write Blog</a>
+                <Link
+                  to={{
+                    pathname: "/blog/create",
+                    hash: "#submit",
+                    search: "?quick-submit=true"
+                  }}
+                >
+                  Write Blog
+                </Link>
               </li>
             </ul>
           </nav>
