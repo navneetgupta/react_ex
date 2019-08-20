@@ -23,6 +23,7 @@
 }
 
 .Post_hdr a:hover,
-.Post_hdr a:active {
+.Post_hdr a:active,
+.Post_hdr a.my_active {
   color: #fa923f;
 }
