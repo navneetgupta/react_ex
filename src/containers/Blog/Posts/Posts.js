@@ -30,7 +30,7 @@ class Posts extends Component {
 
   postselectedHandler = id => {
     // this.props.history.push({ pathname: "/" + id });
-    this.props.history.push("/" + id);
+    this.props.history.push(this.props.match.url + "/" + id);
   };
   render() {
     let posts = <p style={{ textAlign: "center" }}>Something Went Wrong!!!!</p>;
@@ -50,7 +50,7 @@ class Posts extends Component {
     return (
       <div>
         <section className="Posts"> {posts}</section>
-        <Route path="/:id" exact component={FullPost} />
+        <Route path={this.props.match.url + "/:id"} component={FullPost} />
       </div>
     );
   }
