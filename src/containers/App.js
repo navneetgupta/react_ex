@@ -1,12 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
+import { Route, NavLink } from "react-router-dom";
 import styles from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import withClass from "../hoc/WithClass";
 import Aux from "../hoc/Aux";
 import AuthContext from "../context/auth-context";
 import Blog from "./Blog/Blog";
 import { BrowserRouter } from "react-router-dom";
+import Welcome from "./Welcome";
+import Post1 from "./Post1";
+import User1 from "./User1";
+import withClass from "../hoc/WithClass";
+
+const Post1Lazy = React.lazy(() => import("./Post1"));
 
 class App extends Component {
   constructor(props) {
@@ -81,8 +87,9 @@ class App extends Component {
   };
 
   toggleCockpitHandler = () => {
-    const showCockpit = this.state.showCockpit;
-    this.setState({ showCockpit: !showCockpit });
+    this.setState(prevState => {
+      return { showCockpit: !prevState.showCockpit };
+    });
   };
   loginHandler = () => {
     const authenticated = this.state.authenticated;
@@ -132,10 +139,24 @@ class App extends Component {
     }
     return (
       <BrowserRouter>
-        <Aux>
+        <React.Fragment>
+          <nav>
+            <NavLink to="/user"> User Page</NavLink>
+            <NavLink to="/post"> Posts Page</NavLink>
+          </nav>
+          <Route path="/" component={Welcome} exact />
+          <Route path="/user" component={User1} />
+          <Route
+            path="/post"
+            render={() => (
+              <Suspense fallback={<div>Loading...</div>}>
+                <Post1Lazy />
+              </Suspense>
+            )}
+          />
           <button onClick={this.toggleBlogProject}>Toggle Projects</button>
           {currentProject}
-        </Aux>
+        </React.Fragment>
       </BrowserRouter>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
