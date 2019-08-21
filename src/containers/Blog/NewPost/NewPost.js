@@ -24,6 +24,7 @@ class NewPost extends Component {
 
   componentDidMount() {
     // console.log(this.props);
+    // if unauth this.props.history.push("/posts");
   }
   render() {
     let redirect = null;
