@@ -6,6 +6,7 @@ import withClass from "../hoc/WithClass";
 import Aux from "../hoc/Aux";
 import AuthContext from "../context/auth-context";
 import Blog from "./Blog/Blog";
+import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -130,10 +131,12 @@ class App extends Component {
       );
     }
     return (
-      <Aux>
-        <button onClick={this.toggleBlogProject}>Toggle Projects</button>
-        {currentProject}
-      </Aux>
+      <BrowserRouter>
+        <Aux>
+          <button onClick={this.toggleBlogProject}>Toggle Projects</button>
+          {currentProject}
+        </Aux>
+      </BrowserRouter>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }

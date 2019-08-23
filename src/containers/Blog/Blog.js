@@ -1,62 +1,45 @@
 import React, { Component } from "react";
-import axios from "../../axios";
-
-import Post from "../../components/Post/Post";
-import FullPost from "../../components/FullPost/FullPost";
-import NewPost from "../../components/NewPost/NewPost";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
+import Posts from "./Posts/Posts";
+import NewPost from "./NewPost/NewPost";
 import "./Blog.css";
 
 class Blog extends Component {
-  state = {
-    posts: [],
-    selectedPostId: null,
-    error: false
-  };
-  componentDidMount() {
-    axios
-      .get("/posts")
-      .then(response => {
-        const posts = response.data.slice(0, 6).map(post => {
-          return {
-            ...post,
-            author: "Max"
-          };
-        });
-        this.setState({ posts: posts });
-      })
-      .catch(error => {
-        this.setState({ error: true });
-      });
-  }
-  postselectedHandler = id => {
-    this.setState({
-      selectedPostId: id
-    });
-  };
   render() {
-    let posts = <p style={{ textAlign: "center" }}>Something Went Wrong!!!!</p>;
-    if (!this.state.error) {
-      posts = this.state.posts.map(post => {
-        return (
-          <Post
-            title={post.title}
-            key={post.id}
-            author={post.author}
-            clicked={() => this.postselectedHandler(post.id)}
-          />
-        );
-      });
-    }
-
+    console.log(this.props);
     return (
       <div>
-        <section className="Posts"> {posts}</section>
-        <section>
-          <FullPost id={this.state.selectedPostId} />
-        </section>
-        <section>
-          <NewPost />
-        </section>
+        <header className="Post_hdr">
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/posts" exact activeClassName="my_active">
+                  Posts
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={{
+                    pathname: "/blog",
+                    hash: "#submit",
+                    search: "?quick-submit=true"
+                  }}
+                  activeClassName="my_active"
+                  activeStyle={{ color: "#2f35df" }}
+                >
+                  Write Blog
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <Switch>
+          <Route path="/blog" component={NewPost} />
+          <Route path="/posts" component={Posts} />
+          <Redirect from="/" to="/posts" />
+        </Switch>
+
+        {/*<Route path="/" render={() => <h1>HOME</h1>} />*/}
       </div>
     );
   }
